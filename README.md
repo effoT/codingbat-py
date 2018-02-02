@@ -1,2 +1,2 @@
 # codingbat-py
-Codingbat exercises
+Codingbat python exercises
