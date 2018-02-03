@@ -84,8 +84,8 @@ def xyz_there(string):
             return True
     return False
 
-print(xyz_there('abcxyz'))
-print(xyz_there('abc.xyz'))
-print(xyz_there('xyz.abc'))
-print(xyz_there('abc.xyzxyz'))
+# print(xyz_there('abcxyz'))
+# print(xyz_there('abc.xyz'))
+# print(xyz_there('xyz.abc'))
+# print(xyz_there('abc.xyzxyz'))
 
