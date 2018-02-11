@@ -1,4 +1,6 @@
-# All credits belong to codingbat.com
+# Problems presented by codingbat.com
+
+
 
 '''
 #########################################################################################################
