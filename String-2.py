@@ -297,3 +297,256 @@ def xyzMiddle(strIn):
 # if xyzMiddle("xy") != False: print('xyzMiddle("xy") not False')
 # if xyzMiddle("xyz") != True: print('xyzMiddle("xyz") not True')
 # if xyzMiddle("xyzz") != True: print('xyzMiddle("xyzz") not True')
+
+
+'''
+getSandwich
+A sandwich is two pieces of bread with something in between. Return the string that is between the first and last 
+appearance of "bread" in the given string, or return the empty string "" if there are not two pieces of bread.
+'''
+
+def getSandwich(inStr):
+    bread_first_finish = 0
+    bread_last_start = 0
+    if len(inStr) < 5:
+        return ""
+    
+    for o in range(len(inStr) -4):
+        # print(inStr[o:o+5])
+        if inStr[o:o+5] == "bread" and bread_first_finish == 0:
+            bread_first_finish = o + 5
+            # print(o + 5)
+        elif inStr[o:o+5] == "bread" and bread_first_finish != 0:
+            bread_last_start = o
+            # print(o)
+    if bread_first_finish != 0 and bread_last_start != 0:
+        return inStr[bread_first_finish:bread_last_start]
+    else:
+        return ""
+
+
+# if getSandwich("breadjambread") != "jam": print('getSandwich("breadjambread") not jam')
+# if getSandwich("xxbreadjambreadyy") != "jam": print('getSandwich("xxbreadjambreadyy") not jam')
+# if getSandwich("xxbreadyy") != "": print('getSandwich("xxbreadyy") not ""')
+# if getSandwich("xxbreadbreadjambreadyy") != "breadjam": print('getSandwich("xxbreadbreadjambreadyy") not "breadjam"')
+# if getSandwich("breadAbread") != "A": print('getSandwich("breadAbread") not !')
+# if getSandwich("breadbread") != "": print('getSandwich("breadbread") not ""')
+# if getSandwich("abcbreaz") != "": print('getSandwich("abcbreaz") not ""')
+# if getSandwich("xyz") != "": print('getSandwich("xyz") not ""')
+# if getSandwich("") != "": print('getSandwich("") not ""')
+# if getSandwich("breadbreaxbread") != "breax": print('getSandwich("breadbreaxbread") not "breax"')
+# if getSandwich("breaxbreadybread") != "y": print('getSandwich("breaxbreadybread") not "y"')
+# if getSandwich("breadbreadbreadbread") != "breadbread": print('getSandwich("breadbreadbreadbread") not "breadbread"')
+
+'''
+sameStarChar
+Returns true if for every '*' (star) in the string, if there are chars both immediately before and after the star, 
+they are the same.
+'''
+def sameStarChar(inStr):
+    out_status = True
+    for o in range(len(inStr)):
+        if o > 0 and o < (len(inStr) -1) and inStr[o] == chr(42):
+            if inStr[o - 1] == inStr[o + 1]:
+                out_status = True
+            else:
+                out_status = False
+    return out_status
+
+
+# if sameStarChar("xy*yzz") != True: print('sameStarChar("xy*yzz") not True')
+# if sameStarChar("xy*zzz") != False: print('sameStarChar("xy*zzz") not Falsa')
+# if sameStarChar("*xa*az") != True: print('sameStarChar("*xa*az") not True')
+# if sameStarChar("*xa*bz") != False: print('sameStarChar("*xa*bz") not False')
+# if sameStarChar("*xa*a*") != True: print('sameStarChar("*xa*a*") not True')
+# if sameStarChar("") != True: print('sameStarChar("") not True')
+# if sameStarChar("*xa*a*a") != True: print('sameStarChar("*xa*a*a") not True')
+# if sameStarChar("*xa*a*b") != False: print('sameStarChar("*xa*a*b") not False')
+# if sameStarChar("*12*2*2") != True: print('sameStarChar("*12*2*2") not True')
+# if sameStarChar("12*2*3*") != False: print('sameStarChar("12*2*3*") not False')
+# if sameStarChar("abcDEF") != True: print('sameStarChar("abcDEF") not True')
+# if sameStarChar("XY*YYYY*Z*") != False: print('sameStarChar("XY*YYYY*Z*") not False')
+# if sameStarChar("XY*YYYY*Y*") != True: print('sameStarChar("XY*YYYY*Y*") not True')
+# if sameStarChar("12*2*3*") != False: print('sameStarChar("12*2*3*") not False')
+# if sameStarChar("*") != True: print('sameStarChar("*") not True')
+# if sameStarChar("**") != True: print('sameStarChar("**") not True')
+
+'''
+oneTwo
+Given a string, compute a new string by moving the first char to come after the next two chars, 
+so "abc" yields "bca". Repeat this process for each subsequent group of 3 chars, so "abcdef" yields "bcaefd". 
+Ignore any group of fewer than 3 chars at the end.
+'''
+def oneTwo(inStr):
+    new_word = "1"
+    counter = 0
+    if len(inStr) < 3:
+        return ""
+    for o in range(len(inStr) // 3):
+        new_word += inStr[(counter + 1)]
+        new_word += inStr[(counter + 2)]
+        new_word += inStr[(counter)]
+        counter += 3
+    return new_word
+
+
+# if oneTwo("abc") != "bca": print('oneTwo("abc") not "bca"')
+# if oneTwo("tca") != "cat": print('oneTwo("tca") not "cat"')
+# if oneTwo("tcagdo") != "catdog": print('oneTwo("tcagdo") not "catdog"')
+# if oneTwo("chocolate") != "hocolctea": print('oneTwo("chocolate") not "hocolctea"')
+# if oneTwo("1234567890") != "231564897": print('oneTwo("1234567890") not "231564897"')
+# if oneTwo("xabxabxabxabxabxabxab") != "abxabxabxabxabxabxabx": print('oneTwo("xabxabxabxabxabxabxab") not "abxabxabxabxabxabxabx"')
+# if oneTwo("abcdefx") != "bcaefd": print('oneTwo("abcdefx") not "bcaefd"')
+# if oneTwo("abcdefxy") != "bcaefd": print('oneTwo("abcdefxy") not "bcaefd"')
+# if oneTwo("abcdefxyz") != "bcaefdyzx": print('oneTwo("abcdefxyz") not "bcaefdyzx"')
+# if oneTwo("") != "": print('oneTwo("") not ""') 
+# if oneTwo("x") != "": print('oneTwo("x") not ""')
+# if oneTwo("xyz") != "yzx": print('oneTwo("xyz") not "yzx"')
+# if oneTwo("abcdefghijklkmnopqrstuvwxyz1234567890") != "bcaefdhigkljmnkpqostrvwuyzx231564897": print('oneTwo("abcdefghijklkmnopqrstuvwxyz1234567890") not "bcaefdhigkljmnkpqostrvwuyzx231564897"')
+# if oneTwo("abcdefghijklkmnopqrstuvwxyz123456789") != "bcaefdhigkljmnkpqostrvwuyzx231564897": print('oneTwo("abcdefghijklkmnopqrstuvwxyz123456789") not "bcaefdhigkljmnkpqostrvwuyzx231564897"')
+# if oneTwo("abcdefghijklkmnopqrstuvwxyz12345678") != "bcaefdhigkljmnkpqostrvwuyzx231564": print('oneTwo("abcdefghijklkmnopqrstuvwxyz12345678") not "bcaefdhigkljmnkpqostrvwuyzx231564"')
+
+'''
+zipZap 
+Look for patterns like "zip" and "zap" in the string -- length-3, starting with 'z' and ending with 'p'.
+Return a string where for all such words, the middle letter is gone, so "zipXzap" yields "zpXzp".
+'''
+def zipZap(text):
+    no_return_list = []
+    new_text = ""
+    for o in range(1,len(text) - 1):
+        if text[o-1] == "z" and text[o+1] == "p":
+            no_return_list += [o]
+    
+    for o in range(len(text)):
+        if o not in no_return_list:
+            new_text += text[o]
+    return new_text
+
+if zipZap("zipXzap") != "zpXzp": print('zipZap("zipXzap") not "zpXzp"')
+if zipZap("zopzop") != "zpzp": print('zipZap("zopzop") not "zpzp"')
+if zipZap("zzzopzop") != "zzzpzp": print('zipZap("zzzopzop") not "zzzpzp"')
+if zipZap("zibzap") != "zibzp": print('zipZap("zibzap") not "zibzp"')
+if zipZap("zip") != "zp": print('zipZap("zip") not "zp"')
+if zipZap("zi") != "zi": print('zipZap("zi") not "zi"')
+if zipZap("z") != "z": print('zipZap("z") not "z"')
+if zipZap("") != "": print('zipZap("") not ""')
+if zipZap("zzp") != "zp": print('zipZap("zzp") not "zp"')
+if zipZap("abcppp") != "abcppp": print('zipZap("abcppp") not "abcppp"')
+if zipZap("azbcppp") != "azbcppp": print('zipZap("azbcppp") not "azbcppp"')
+if zipZap("azbcpzpp") != "azbcpzp": print('zipZap("azbcpzpp") not "azbcpzp"')
+
+'''
+starOut
+Return a version of the given string, where for every star (*) in the string the star and the chars 
+immediately to its left and right are gone. So "ab*cd" yields "ad" and "ab**cd" also yields "ad".
+'''
+def starOut(text):
+    new_text = ""
+    for o in range(len(text)):
+        if o == 0 and len(text) > 1:
+            if text[o] != chr(42) and text[o+1] != chr(42):
+                new_text += text[o]
+        elif (len(text) - 1) > o:  
+            if text[o-1] != chr(42) and text[o] != chr(42) and text[o+1] != chr(42):
+                new_text += text[o]
+        elif (len(text) - 1) == o:
+             if text[o-1] != chr(42) and text[o] != chr(42):
+                new_text += text[o]
+    return new_text
+
+
+# if starOut("ab*cd") != "ad": print('starOut("ab*cd")  not "ad"')
+# if starOut("ab**cd") != "ad": print('starOut("ab**cd")  not "ad"')
+# if starOut("sm*eilly") != "silly": print('starOut("sm*eilly")  not "silly"')
+# if starOut("sm*eil*ly") != "siy": print('starOut("sm*eil*ly")  not "siy"')
+# if starOut("sm**eil*ly") != "siy": print('starOut("sm**eil*ly")  not "siy"')
+# if starOut("sm***eil*ly") != "siy": print('starOut("sm***eil*ly")  not "siy"')
+# if starOut("stringy*") != "string": print('starOut("stringy*")  not "string"')
+# if starOut("*stringy") != "tringy": print('starOut("*stringy")  not "tringy"')
+# if starOut("*str*in*gy") != "ty": print('starOut("*str*in*gy")  not "ty"')
+# if starOut("abc") != "abc": print('starOut("abc")  not "abc"')
+# if starOut("a*bc") != "c": print('starOut("a*bc")  not "c"')
+# if starOut("ab") != "ab": print('starOut("ab")  not "ab"')
+# if starOut("a*b") != "": print('starOut("a*b")  not ""')
+# if starOut("a") != "a": print('starOut("a")  not "a"')
+# if starOut("a*") != "": print('starOut("a*")  not ""')
+# if starOut("*a") != "": print('starOut("*a")  not ""')
+# if starOut("*") != "": print('starOut("*")  not ""')
+# if starOut("") != "": print('starOut("")  not ""')
+
+
+'''
+plusOut
+Given a string and a non-empty word string, return a version of the original String where all chars 
+have been replaced by pluses ("+"), except for appearances of the word string which are preserved unchanged.
+'''
+def plusOut(text,word):
+    locations = []
+    new_word = ""
+    # first gather the locations of the given word letters
+    for o in range(len(text) - len(word) + 1):
+        if text[o:o+len(word)] == word:
+            for i in range(len(word)):
+                locations += [(i + o)]
+    
+    #loop through the locations of the given word letters and write them into new string as desired
+    for o in range(len(text)):
+        if o in locations:
+            new_word += text[o]
+        else:
+            new_word += "+"
+    return new_word
+
+
+# if plusOut("12xy34", "xy")  != "++xy++": print('plusOut("12xy34", "xy")  not "++xy++"')
+# if plusOut("12xy34", "1") != "1+++++": print('plusOut("12xy34", "1")  not "1+++++"')
+# if plusOut("12xy34xyabcxy", "xy") != "++xy++xy+++xy": print('plusOut("12xy34xyabcxy", "xy")  not "++xy++xy+++xy"')
+# if plusOut("abXYabcXYZ", "ab") != "ab++ab++++": print('plusOut("abXYabcXYZ", "ab")  not "ab++ab++++"')
+# if plusOut("abXYabcXYZ", "abc") != "++++abc+++": print('plusOut("abXYabcXYZ", "abc")  not "++++abc+++"')
+# if plusOut("abXYabcXYZ", "XY") != "++XY+++XY+": print('plusOut("abXYabcXYZ", "XY")  not "++XY+++XY+"')
+# if plusOut("abXYxyzXYZ", "XYZ") != "+++++++XYZ": print('plusOut("abXYxyzXYZ", "XYZ")  not "+++++++XYZ"')
+# if plusOut("--++ab", "++") != "++++++": print('plusOut("--++ab", "++")  not "++++++"')
+# if plusOut("aaxxxxbb", "xx") != "++xxxx++": print('plusOut("aaxxxxbb", "xx")  not "++xxxx++"')
+# if plusOut("123123", "3") != "++3++3": print('plusOut("123123", "3")  not "++3++3"')
+
+'''
+wordEnds
+Given a string and a non-empty word string, return a string made of each char just before and just after 
+every appearance of the word in the string. Ignore cases where there is no cha before or after the word, 
+and a char may be included twice if it is between two words.
+'''
+def wordEnds(text,word):
+    if len(text) <= len(word):
+        return ""
+    new_word = ""
+    for o in range(len(text) - len(word) + 1):
+        # check if first instance
+        if o == 0:
+            if text[o:o+len(word)] == word:
+                new_word += text[o+len(word)]
+            # check if last instance
+        elif o == len(text) - len(word):
+            if text[o:o+len(word)] == word:
+                new_word += text[o - 1]
+            # must be in the middle
+        else:
+            if text[o:o+len(word)] == word:
+                new_word += text[o - 1]
+                new_word += text[o + len(word)]
+    return new_word
+
+
+# if wordEnds("abcXY123XYijk", "XY") != "c13i": print('wordEnds("abcXY123XYijk", "XY")  not "c13i"')
+# if wordEnds("XY123XY", "XY") != "13": print('wordEnds("XY123XY", "XY")  not "13"')
+# if wordEnds("XY1XY", "XY") != "11": print('wordEnds("XY1XY", "XY")  not "11"')
+# if wordEnds("XYXY", "XY") != "XY": print('wordEnds("XYXY", "XY")  not "XY"')
+# if wordEnds("XY", "XY") != "": print('wordEnds("XY", "XY")  not ""')
+# if wordEnds("Hi", "XY") != "": print('wordEnds("Hi", "XY")  not ""')
+# if wordEnds("", "XY") != "": print('wordEnds("", "XY")  not ""')
+# if wordEnds("abc1xyz1i1j", "1") != "cxziij": print('wordEnds("abc1xyz1i1j", "1")  not "cxziij"')
+# if wordEnds("abc1xyz1", "1") != "cxz": print('wordEnds("abc1xyz1", "1")  not "cxz"')
+# if wordEnds("abc1xyz11", "1") != "cxz11": print('wordEnds("abc1xyz11", "1")  not "cxz11"')
+# if wordEnds("abc1xyz1abc", "abc") != "11": print('wordEnds("abc1xyz1abc", "abc")  not "11"')
+# if wordEnds("abc1xyz1abc", "b") != "acac": print('wordEnds("abc1xyz1abc", "b")  not "acac"')
+# if wordEnds("abc1abc1abc", "abc") != "1111": print('wordEnds("abc1abc1abc", "abc")  not "1111"')
