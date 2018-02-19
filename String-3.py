@@ -313,7 +313,7 @@ def maxBlock(text):
     max_counter = 0
     for o in range(len(text)):
         counter = 1
-        if counter >= max_counter: # if thats there is only different characters in the string
+        if counter >= max_counter: # if there is only different characters in the string
             max_counter = counter
         for i in range(o,len(text)-1):
             if text[i] == text[i+1]:
