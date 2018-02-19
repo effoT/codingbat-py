@@ -411,30 +411,43 @@ zipZap
 Look for patterns like "zip" and "zap" in the string -- length-3, starting with 'z' and ending with 'p'.
 Return a string where for all such words, the middle letter is gone, so "zipXzap" yields "zpXzp".
 '''
-def zipZap(text):
-    no_return_list = []
-    new_text = ""
-    for o in range(1,len(text) - 1):
-        if text[o-1] == "z" and text[o+1] == "p":
-            no_return_list += [o]
+# crate a list of what to omit and print out every location that is not in the list
+# def zipZap(text):
+#     no_return_list = []
+#     new_text = ""
+#     for o in range(1,len(text) - 1):
+#         if text[o-1] == "z" and text[o+1] == "p":
+#             no_return_list += [o]
     
-    for o in range(len(text)):
-        if o not in no_return_list:
-            new_text += text[o]
-    return new_text
+#     for o in range(len(text)):
+#         if o not in no_return_list:
+#             new_text += text[o]
+#     return new_text
 
-if zipZap("zipXzap") != "zpXzp": print('zipZap("zipXzap") not "zpXzp"')
-if zipZap("zopzop") != "zpzp": print('zipZap("zopzop") not "zpzp"')
-if zipZap("zzzopzop") != "zzzpzp": print('zipZap("zzzopzop") not "zzzpzp"')
-if zipZap("zibzap") != "zibzp": print('zipZap("zibzap") not "zibzp"')
-if zipZap("zip") != "zp": print('zipZap("zip") not "zp"')
-if zipZap("zi") != "zi": print('zipZap("zi") not "zi"')
-if zipZap("z") != "z": print('zipZap("z") not "z"')
-if zipZap("") != "": print('zipZap("") not ""')
-if zipZap("zzp") != "zp": print('zipZap("zzp") not "zp"')
-if zipZap("abcppp") != "abcppp": print('zipZap("abcppp") not "abcppp"')
-if zipZap("azbcppp") != "azbcppp": print('zipZap("azbcppp") not "azbcppp"')
-if zipZap("azbcpzpp") != "azbcpzp": print('zipZap("azbcpzpp") not "azbcpzp"')
+# do it with one loop by altering the original text and counting by its updated length and chars
+def zipZap(text):
+    o = 0
+    while(o < len(text) -2):
+        if text[o] == "z" and text[o+2] == "p":
+            temp_text = text[:(o+1)]
+            temp_text += text[(o+2):]
+            text = temp_text
+        o += 1
+    return text
+
+
+# if zipZap("zipXzap") != "zpXzp": print('zipZap("zipXzap") not "zpXzp"')
+# if zipZap("zopzop") != "zpzp": print('zipZap("zopzop") not "zpzp"')
+# if zipZap("zzzopzop") != "zzzpzp": print('zipZap("zzzopzop") not "zzzpzp"')
+# if zipZap("zibzap") != "zibzp": print('zipZap("zibzap") not "zibzp"')
+# if zipZap("zip") != "zp": print('zipZap("zip") not "zp"')
+# if zipZap("zi") != "zi": print('zipZap("zi") not "zi"')
+# if zipZap("z") != "z": print('zipZap("z") not "z"')
+# if zipZap("") != "": print('zipZap("") not ""')
+# if zipZap("zzp") != "zp": print('zipZap("zzp") not "zp"')
+# if zipZap("abcppp") != "abcppp": print('zipZap("abcppp") not "abcppp"')
+# if zipZap("azbcppp") != "azbcppp": print('zipZap("azbcppp") not "azbcppp"')
+# if zipZap("azbcpzpp") != "azbcpzp": print('zipZap("azbcpzpp") not "azbcpzp"')
 
 '''
 starOut
@@ -481,22 +494,36 @@ plusOut
 Given a string and a non-empty word string, return a version of the original String where all chars 
 have been replaced by pluses ("+"), except for appearances of the word string which are preserved unchanged.
 '''
-def plusOut(text,word):
-    locations = []
-    new_word = ""
-    # first gather the locations of the given word letters
-    for o in range(len(text) - len(word) + 1):
-        if text[o:o+len(word)] == word:
-            for i in range(len(word)):
-                locations += [(i + o)]
+# using 2 loops
+# def plusOut(text,word):
+#     locations = []
+#     new_word = ""
+#     # first gather the locations of the given word letters
+#     for o in range(len(text) - len(word) + 1):
+#         if text[o:o+len(word)] == word:
+#             for i in range(len(word)):
+#                 locations += [(i + o)]
     
-    #loop through the locations of the given word letters and write them into new string as desired
-    for o in range(len(text)):
-        if o in locations:
-            new_word += text[o]
+#     #loop through the locations of the given word letters and write them into new string as desired
+#     for o in range(len(text)):
+#         if o in locations:
+#             new_word += text[o]
+#         else:
+#             new_word += "+"
+#     return new_word
+
+# using 1 loop
+def plusOut(text, word):
+    new_text = ""
+    o = 0
+    while(o < len(text)):
+        if text[o:o+len(word)] == word:
+            new_text += word
+            o += len(word)
         else:
-            new_word += "+"
-    return new_word
+            new_text += "+"
+            o += 1
+    return new_text
 
 
 # if plusOut("12xy34", "xy")  != "++xy++": print('plusOut("12xy34", "xy")  not "++xy++"')
