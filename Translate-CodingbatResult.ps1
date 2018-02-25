@@ -1,22 +1,33 @@
-# this will work if set directly to the console
+# this will work if pasted directly to the console
 $var = @'
-sumNumbers("abc123xyz") → 123	3	X	
-sumNumbers("aa11b33") → 44	3	X	
-sumNumbers("7 11") → 18	3	X	
-sumNumbers("Chocolate") → 0 3	X	
-sumNumbers("5hoco1a1e") → 7	3	X	
-sumNumbers("5$$1;;1!!") → 7	3	X	
-sumNumbers("a1234bb11") → 1245	3	X	
-sumNumbers("") → 0	3	X	
-sumNumbers("a22bbb3") → 25	3
+copyEvens([3, 2, 4, 5, 8], 2) → [2, 4]+[1, 2, 3]	X	
+copyEvens([3, 2, 4, 5, 8], 3) → [2, 4, 8]+	[1, 2, 3]	X	
+copyEvens([6, 1, 2, 4, 5, 8], 3) → [6, 2, 4]+	[1, 2, 3]	X	
+copyEvens([6, 1, 2, 4, 5, 8], 4) → [6, 2, 4, 8]+	[1, 2, 3]	X	
+copyEvens([3, 1, 4, 1, 5], 1) → [4]+	[1, 2, 3]	X	
+copyEvens([2], 1) → [2]+	[1, 2, 3]	X	
+copyEvens([6, 2, 4, 8], 2) → [6, 2]+	[1, 2, 3]	X	
+copyEvens([6, 2, 4, 8], 3) → [6, 2, 4]+	[1, 2, 3]	X	
+copyEvens([6, 2, 4, 8], 4) → [6, 2, 4, 8]+	[1, 2, 3]	X	
+copyEvens([1, 8, 4], 1) → [8]+	[1, 2, 3	X	
+copyEvens([1, 8, 4], 2) → [8, 4]+	[1, 2, 3]	X	
+copyEvens([2, 8, 4], 2) → [2, 8]+	[1, 2, 3]	
 '@
 
 # if the result is expected to be a string
 foreach ($line in $var.split("`n"))
 {
     $query = $line.Split([char]8594)[0]
-    $result = $line.Split([char]8594)[1].split('"')[1]
+    $result = $line.Split([char]8594)[1]
     "if $($query) != `"$($result)`" :print('$($query) not `"$($result)`"')" | Write-output
+}
+
+# if the result is expected to be an array, remember to add to the data + as a delimiter
+foreach ($line in $var.split("`n"))
+{
+    $query = $line.Split([char]8594)[0]
+    $result = $line.Split([char]8594)[1].split("+")[0]
+    "if $($query) != $($result) :print('$($query) not $($result)')" | Write-output
 }
 
 #if the result is expected to be a num (currently supports only one digit)

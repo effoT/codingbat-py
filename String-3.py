@@ -1,4 +1,4 @@
-# these are problems at codingbat.com for java, testing them out on python.abs
+# these are problems at codingbat.com for java, testing them out on python
 
 '''
 countYZ
@@ -377,7 +377,34 @@ example the "is" in "this" does not count. (Note: Character.isLetter(char) tests
 '''
 
 def notReplace(text):
-    pass
+    o = 2
+    while o <= len(text):
+        # print(o)
+        if o == 2 and len(text) == 2 and text[0:2] == "is":
+            text = text[0:o] + " not" + text[o:]
+            o += 4
+        elif o == 2 and text[0:2] == "is" and text[o].isalpha() != True:
+            text = text[0:o] + " not" + text[o:]
+            o += 4
+        elif o > 2 and o < len(text) and text[o-3].isalpha() != True and text[o-2:o] == "is" and text[o].isalpha() != True:
+            text = text[0:o] + " not" + text[o:]
+            o += 4
+        elif o == len(text) and text[o-3].isalpha() != True and text[o-2:o] == "is":
+            text = text[0:o] + " not" + text[o:]
+            o += 4
+        o += 1
+    return text
 
 
-print(notReplace("is test"))
+# if notReplace("is test") != "is not test": print('notReplace("is test")  not "is not test"')
+# if notReplace("is-is") != "is not-is not": print('notReplace("is-is")  not "is not-is not"')
+# if notReplace("This is right") != "This is not right": print('notReplace("This is right")  not "This is not right"')
+# if notReplace("This is isabell") != "This is not isabell": print('notReplace("This is isabell")  not "This is not isabell"')
+# if notReplace("") != "": print('notReplace("")  not ""')
+# if notReplace("is") != "is not": print('notReplace("is")  not "is not"')
+# if notReplace("isis") != "isis": print('notReplace("isis")  not "isis"')
+# if notReplace("Dis is bliss is") != "Dis is not bliss is not": print('notReplace("Dis is bliss is")  not "Dis is not bliss is not"')
+# if notReplace("is his") != "is not his": print('notReplace("is his")  not "is not his"')
+# if notReplace("xis yis") != "xis yis": print('notReplace("xis yis")  not "xis yis"')
+# if notReplace("AAAis is") != "AAAis is not": print('notReplace("AAAis is")  not "AAAis is not"')
+
